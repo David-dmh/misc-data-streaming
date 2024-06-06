@@ -14,18 +14,22 @@ def data_stream():
     res = requests.get("https://randomuser.me/api/")
     
     # to json
-    print(res.json())
+    res = res.json()
+    res = res["results"][0]
+    print(json.dumps(res, indent=3))
 
-with DAG(
-    "dag_1",
-    default_args=dict_args,
-    schedule_interval="@daily",
-    catchup=False
-) as dag:
-    task_streaming = PythonOperator(
-        task_id="stream_data_from_api",
-        python_calllable=data_stream
-    )    
+data_stream()
+
+# with DAG(
+#     "dag_1",
+#     default_args=dict_args,
+#     schedule_interval="@daily",
+#     catchup=False
+# ) as dag:
+#     task_streaming = PythonOperator(
+#         task_id="stream_data_from_api",
+#         python_calllable=data_stream
+#     )    
 
 
 
