@@ -3,8 +3,10 @@
 Data streaming test project using an API.
 
 Notes:
-- Using venv:
-    - packages in requirements.txt
-        - pip3 install -r requirements.txt
-- activation from root
-    - source venv/bin/activate
+- Create venv in root
+- Activate venv
+    - .\venv\Scripts\activate.bat  (CMD prompt)
+- Install requirements.txt
+    - pip3 install -r requirements.txt
+- Start docker containers
+    - docker compose up -d
