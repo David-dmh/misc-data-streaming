@@ -14,6 +14,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
+from __future__ import annotations
 
 from airflow.ti_deps.dependencies_states import (
     BACKFILL_QUEUEABLE_STATES,
@@ -23,8 +24,8 @@ from airflow.ti_deps.dependencies_states import (
 )
 from airflow.ti_deps.deps.dag_ti_slots_available_dep import DagTISlotsAvailableDep
 from airflow.ti_deps.deps.dag_unpaused_dep import DagUnpausedDep
+from airflow.ti_deps.deps.dagrun_backfill_dep import DagRunNotBackfillDep
 from airflow.ti_deps.deps.dagrun_exists_dep import DagrunRunningDep
-from airflow.ti_deps.deps.dagrun_id_dep import DagrunIdDep
 from airflow.ti_deps.deps.exec_date_after_start_date_dep import ExecDateAfterStartDateDep
 from airflow.ti_deps.deps.pool_slots_available_dep import PoolSlotsAvailableDep
 from airflow.ti_deps.deps.runnable_exec_date_dep import RunnableExecDateDep
@@ -85,7 +86,7 @@ SCHEDULER_QUEUED_DEPS = {
     TaskConcurrencyDep(),
     PoolSlotsAvailableDep(),
     DagrunRunningDep(),
-    DagrunIdDep(),
+    DagRunNotBackfillDep(),
     DagUnpausedDep(),
     ExecDateAfterStartDateDep(),
     TaskNotRunningDep(),

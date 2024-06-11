@@ -1,13 +1,14 @@
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
-with warnings.catch_warnings():
-    warnings.filterwarnings("ignore",category=DeprecationWarning)
-    from datetime import datetime
-    from airflow import DAG
-    from airflow.operators.python import PythonOperator
-    import json
-    import requests
+from datetime import datetime
+from kafka import KafkaProducer
+import time
+# from airflow import DAG
+# from airflow.operators.python import PythonOperator
+import json
+import requests
+
 
 dict_args = {
     "owner": "main",
@@ -51,7 +52,17 @@ def format_user_data(res):
 def stream_data():
     res = get_data()
     res = format_user_data(res)
-    print(json.dumps(res, indent=3))
+    # print(json.dumps(res, indent=3))
+
+    producer = KafkaProducer(
+        bootstrap_servers=["localhost:9092"],
+        max_block_ms=5000
+    )
+
+    producer.send(
+        b"users_created",
+        json.dumps(res).encode("utf-8")
+    )
 
 # test
 stream_data()
