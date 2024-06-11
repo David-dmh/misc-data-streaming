@@ -4,8 +4,8 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from datetime import datetime
 from kafka import KafkaProducer
 import time
-# from airflow import DAG
-# from airflow.operators.python import PythonOperator
+from airflow import DAG
+from airflow.operators.python import PythonOperator
 import json
 import requests
 
@@ -65,7 +65,7 @@ def stream_data():
     )
 
 # test
-stream_data()
+# stream_data()
 
 # with DAG(
 #     "dag_1",
