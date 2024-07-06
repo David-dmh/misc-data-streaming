@@ -12,7 +12,7 @@ Boot up (after install [see below]):
 
 Install:
 - Create venv in root (once-off / new pkg)
-    - python -m venv venv
+    - python(3) -m venv venv
 - Activate venv
     - source ./venv/bin/activate  (CMD prompt)
 - Install requirements.txt
